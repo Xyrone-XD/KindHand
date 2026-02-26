@@ -2,31 +2,34 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { 
   getAuth,
   signInWithEmailAndPassword,
-  signInWithPopup,
   GoogleAuthProvider,
+  signInWithPopup,
   RecaptchaVerifier,
   signInWithPhoneNumber
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+// 🔹 Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyASnava6wz8tHnNXoUg-TvHvr0c-Dbvxic",
   authDomain: "kindhand-9413f.firebaseapp.com",
   projectId: "kindhand-9413f",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ✅ Email Login
-window.login = async function() {
+// ✅ Email/Password Login
+window.emailLogin = async function() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    alert("Login Successful!");
-  } catch (error) {
-    alert(error.message);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    alert(`Welcome ${userCredential.user.email}`);
+    // Redirect to home page
+    window.location.href = "home.html";
+  } catch (err) {
+    alert(err.message);
   }
 };
 
@@ -34,34 +37,28 @@ window.login = async function() {
 window.googleLogin = async function() {
   const provider = new GoogleAuthProvider();
   try {
-    await signInWithPopup(auth, provider);
-    alert("Google Login Success!");
-  } catch (error) {
-    alert(error.message);
+    const result = await signInWithPopup(auth, provider);
+    alert(`Welcome ${result.user.displayName}`);
+    window.location.href = "home.html";
+  } catch (err) {
+    alert(err.message);
   }
 };
 
-// ✅ Setup reCAPTCHA ONCE
+// ✅ Phone Login
 window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
   size: 'invisible'
 });
 
-// ✅ Phone Login
 window.phoneLogin = async function() {
-  const phoneNumber = prompt("Enter phone number with +91");
-
+  const phone = prompt("Enter phone number with country code, e.g +91XXXXXXXXXX");
   try {
-    const confirmation = await signInWithPhoneNumber(
-      auth,
-      phoneNumber,
-      window.recaptchaVerifier
-    );
-
-    const otp = prompt("Enter OTP");
-    await confirmation.confirm(otp);
-
-    alert("Phone Login Success!");
-  } catch (error) {
-    alert(error.message);
+    const confirmationResult = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
+    const otp = prompt("Enter OTP sent to your phone");
+    await confirmationResult.confirm(otp);
+    alert("Phone login successful!");
+    window.location.href = "home.html";
+  } catch (err) {
+    alert(err.message);
   }
 };
