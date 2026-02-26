@@ -1,61 +1,67 @@
-function login() {
-    let user = document.getElementById("username").value;
-    if(user === "") {
-        alert("Enter your name");
-        return;
-    }
-    localStorage.setItem("kindhandUser", user);
-    window.location.href = "index.html";
-}
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { 
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-function addProduct() {
-    let name = document.getElementById("pname").value;
-    let price = document.getElementById("price").value;
-    let contact = document.getElementById("contact").value;
-    let file = document.getElementById("imageInput").files[0];
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+};
 
-    if(!file) {
-        alert("Upload image");
-        return;
-    }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-    let reader = new FileReader();
-    reader.onload = function() {
-        let product = {
-            name: name,
-            price: price,
-            contact: contact,
-            image: reader.result
-        };
+// ✅ Email Login
+window.login = async function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-        let products = JSON.parse(localStorage.getItem("products")) || [];
-        products.push(product);
-        localStorage.setItem("products", JSON.stringify(products));
-        alert("Product Added!");
-        window.location.href = "index.html";
-    };
-    reader.readAsDataURL(file);
-}
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Login Successful!");
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
-window.onload = function() {
-    let user = localStorage.getItem("kindhandUser");
-    if(user && document.getElementById("greetText")) {
-        document.getElementById("greetText").innerText =
-            "Welcome, " + user + " 👋";
-    }
+// ✅ Google Login
+window.googleLogin = async function() {
+  const provider = new GoogleAuthProvider();
+  try {
+    await signInWithPopup(auth, provider);
+    alert("Google Login Success!");
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
-    let productList = document.getElementById("productList");
-    if(productList) {
-        let products = JSON.parse(localStorage.getItem("products")) || [];
-        products.forEach(p => {
-            productList.innerHTML += `
-            <div class="product-card">
-                <img src="${p.image}">
-                <h3>${p.name}</h3>
-                <p>₹${p.price}</p>
-                <p>Contact: ${p.contact}</p>
-            </div>
-            `;
-        });
-    }
-}
+// ✅ Setup reCAPTCHA ONCE
+window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+  size: 'invisible'
+});
+
+// ✅ Phone Login
+window.phoneLogin = async function() {
+  const phoneNumber = prompt("Enter phone number with +91");
+
+  try {
+    const confirmation = await signInWithPhoneNumber(
+      auth,
+      phoneNumber,
+      window.recaptchaVerifier
+    );
+
+    const otp = prompt("Enter OTP");
+    await confirmation.confirm(otp);
+
+    alert("Phone Login Success!");
+  } catch (error) {
+    alert(error.message);
+  }
+};
