@@ -3,15 +3,17 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  font-family: Arial;
+  margin: 0;
+  background: linear-gradient(135deg,#1f1c2c,#928dab);
+  font-family: Arial, sans-serif;
 }
 
 .container {
-  background: white;
+  background: rgba(255,255,255,0.95);
   padding: 40px;
-  border-radius: 15px;
+  border-radius: 20px;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   animation: fadeIn 1s ease;
 }
 
@@ -20,20 +22,32 @@ input {
   width: 250px;
   margin: 10px auto;
   padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 button {
-  padding: 10px 30px;
+  padding: 10px 20px;
   margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
 }
 
-.icons {
+button:hover {
+  background-color: #45a049;
+}
+
+.login-icons {
   margin-top: 20px;
 }
 
 .icon {
-  width: 40px;
-  margin: 10px;
+  width: 45px;
+  margin: 0 10px;
   cursor: pointer;
   transition: transform 0.3s;
 }
@@ -44,5 +58,5 @@ button {
 
 @keyframes fadeIn {
   from {opacity: 0; transform: translateY(-20px);}
-  to {opacity: 1;}
+  to {opacity: 1; transform: translateY(0);}
 }
