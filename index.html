@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KindHand Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-  <h2>Login</h2>
+  <h2>KindHand Login</h2>
 
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="emailLogin()">Login</button>
 
-  <button onclick="login()">Login</button>
-
-  <div class="icons">
-    <img src="google.png" onclick="googleLogin()" class="icon"/>
-    <img src="phone.png" onclick="phoneLogin()" class="icon"/>
+  <div class="login-icons">
+    <img src="google.png" class="icon" onclick="googleLogin()" alt="Google Login">
+    <img src="phone.png" class="icon" onclick="phoneLogin()" alt="Phone Login">
   </div>
 
   <div id="recaptcha-container"></div>
