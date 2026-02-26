@@ -1,124 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KindHand - Login</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-}
-
-.container {
-    width: 380px;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background: #2a5298;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-button:hover {
-    background: #1e3c72;
-}
-
-.switch {
-    text-align: center;
-    margin-top: 15px;
-    cursor: pointer;
-    color: #2a5298;
-    font-size: 14px;
-}
-
-.hidden {
-    display: none;
-}
-
-.forgot {
-    font-size: 13px;
-    text-align: right;
-    margin-top: 5px;
-    cursor: pointer;
-    color: #555;
-}
-</style>
+    <title>KindHand Store</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+<header>
+    <div class="logo">KindHand</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Cart 🛒</a>
+        <a href="login.html" id="authBtn">Login</a>
+    </nav>
+</header>
 
-    <!-- LOGIN FORM -->
-    <div id="loginForm">
-        <h2>Login</h2>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <div class="forgot">Forgot Password?</div>
-        <button>Login</button>
-        <div class="switch" onclick="showSignup()">Don't have an account? Sign Up</div>
+<section class="hero">
+    <h1 id="greetText">Welcome to KindHand 🛍</h1>
+    <p>Premium Home Decor Collection</p>
+</section>
+
+<section class="products">
+    <div class="card">
+        <h3>Wooden Lamp</h3>
+        <p>₹1,499</p>
+        <button>Add to Cart</button>
     </div>
 
-    <!-- SIGNUP FORM -->
-    <div id="signupForm" class="hidden">
-        <h2>Sign Up</h2>
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <button>Create Account</button>
-        <div class="switch" onclick="showLogin()">Already have an account? Login</div>
+    <div class="card">
+        <h3>Modern Vase</h3>
+        <p>₹999</p>
+        <button>Add to Cart</button>
     </div>
 
-</div>
+    <div class="card">
+        <h3>Wall Art Frame</h3>
+        <p>₹1,299</p>
+        <button>Add to Cart</button>
+    </div>
+</section>
 
-<script>
-function showSignup() {
-    document.getElementById("loginForm").classList.add("hidden");
-    document.getElementById("signupForm").classList.remove("hidden");
-}
-
-function showLogin() {
-    document.getElementById("signupForm").classList.add("hidden");
-    document.getElementById("loginForm").classList.remove("hidden");
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
