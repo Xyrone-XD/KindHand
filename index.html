@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>KindHand Store</title>
+    <title>KindHand Marketplace</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -9,37 +9,15 @@
 <header>
     <div class="logo">KindHand</div>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Products</a>
-        <a href="#">Cart 🛒</a>
+        <a href="jobs.html">💼 Jobs</a>
+        <a href="sell.html">Sell</a>
         <a href="login.html" id="authBtn">Login</a>
     </nav>
 </header>
 
-<section class="hero">
-    <h1 id="greetText">Welcome to KindHand 🛍</h1>
-    <p>Premium Home Decor Collection</p>
-</section>
+<h2 id="greetText" class="center-text">Welcome to KindHand 🛍</h2>
 
-<section class="products">
-    <div class="card">
-        <h3>Wooden Lamp</h3>
-        <p>₹1,499</p>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="card">
-        <h3>Modern Vase</h3>
-        <p>₹999</p>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="card">
-        <h3>Wall Art Frame</h3>
-        <p>₹1,299</p>
-        <button>Add to Cart</button>
-    </div>
-</section>
+<div class="product-container" id="productList"></div>
 
 <script src="script.js"></script>
 </body>
